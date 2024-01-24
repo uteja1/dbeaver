@@ -18,6 +18,7 @@
 package org.jkiss.dbeaver.ui.controls.lightgrid;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
@@ -87,7 +88,13 @@ class GridColumnRenderer extends AbstractRenderer {
     }
 
     public void paint(GC gc, Rectangle bounds, boolean selected, boolean hovering, IGridColumn element) {
-        gc.setBackground(grid.getLabelProvider().getHeaderBackground(element, selected || hovering));
+
+        IGridLabelProvider labelProvider = grid.getLabelProvider();
+        Color headerBackground = labelProvider.getHeaderBackground(element, selected || hovering);
+        if (headerBackground == null || headerBackground.isDisposed()) {
+            headerBackground = getDisplay().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND);
+        }
+        gc.setBackground(headerBackground);
         gc.fillRectangle(bounds.x, bounds.y, bounds.width, bounds.height);
 
         // Draw border
@@ -121,7 +128,7 @@ class GridColumnRenderer extends AbstractRenderer {
                 gc.drawLine(bounds.x + 1, bounds.y + bounds.height - 2, bounds.x + bounds.width - 2, bounds.y + bounds.height - 2);
             }
         } else {
-            gc.setForeground(grid.getLabelProvider().getHeaderBorder(element));
+            gc.setForeground(labelProvider.getHeaderBorder(element));
             gc.drawLine(bounds.x + bounds.width - 1, bounds.y, bounds.x + bounds.width - 1, bounds.y + bounds.height - 1);
             gc.drawLine(bounds.x, bounds.y + bounds.height - 1, bounds.x + bounds.width - 1, bounds.y + bounds.height - 1);
         }
@@ -168,7 +175,7 @@ class GridColumnRenderer extends AbstractRenderer {
             }
         }
 
-        gc.setForeground(grid.getLabelProvider().getHeaderForeground(element, selected || hovering));
+        gc.setForeground(headerBackground);
 
         { // Draw column name
             final String text = UITextUtils.getShortString(grid.fontMetrics, getColumnText(element), bounds.width);
@@ -183,7 +190,7 @@ class GridColumnRenderer extends AbstractRenderer {
             if (!CommonUtils.isEmpty(text)) {
                 text = UITextUtils.getShortString(grid.fontMetrics, text, bounds.width);
                 bounds.y += TOP_MARGIN + grid.fontMetrics.getHeight();
-                gc.setForeground(grid.getLabelProvider().getHeaderBorder(element));
+                gc.setForeground(labelProvider.getHeaderBorder(element));
                 gc.setFont(grid.normalFont);
                 gc.setClipping(bounds.x, bounds.y, bounds.width, grid.fontMetrics.getHeight());
                 gc.drawString(text, bounds.x, bounds.y, isTransparent);
