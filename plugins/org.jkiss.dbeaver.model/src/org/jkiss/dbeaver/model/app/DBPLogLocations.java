@@ -14,29 +14,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.jkiss.dbeaver.model.app;
 
+import java.io.File;
+import java.util.List;
+
 import org.jkiss.code.NotNull;
+import org.jkiss.code.Nullable;
 
 /**
- * DB desktop application.
+ * Locations of app's log files.
  */
-public interface DBPApplicationDesktop extends DBPApplication {
-
+public interface DBPLogLocations {
     /**
-     * Returns last user activity time
-     * @return -1 by default
+     * Returns a file representing the current debug log file, or {@code null} if it is turned off.
+     * 
+     * @return debug log file or {@code null} if it is turned off
      */
-    long getLastUserActivityTime();
+    @Nullable
+    File getDebugLog();
 
     /**
-     * Returns the log locations the app works with. 
+     * Suggest a name for a new file with a debug log backup.
      * 
-     * <p> Note that the app user can change log locations during app runtime, but they won't be changed until the next start.
+     * @return file with a new name for a backup of a debug log file
+     */
+    @Nullable
+    File proposeDebugLogRotation();
+
+    /**
+     * Return all debug log files. The list will be empty if debug logs are disabled.
      * 
-     * @return log locations
+     * @return a list with all log files
      */
     @NotNull
-    DBPLogLocations getLogLocations();
+    List<File> getDebugLogFiles();
 }
