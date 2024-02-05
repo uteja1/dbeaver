@@ -31,6 +31,7 @@ public enum WSEventTopic {
     RM_SCRIPTS("cb_scripts"),
     PROJECTS("cb_projects"),
     OBJECT_PERMISSIONS("cb_object_permissions"),
+    OBJECT_PERMISSIONS(""),
     SUBJECT_PERMISSIONS("cb_subject_permissions");
 
     private final String topicId;

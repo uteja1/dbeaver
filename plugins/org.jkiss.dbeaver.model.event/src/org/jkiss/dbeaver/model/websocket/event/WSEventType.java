@@ -92,6 +92,7 @@ public enum WSEventType {
     TEMP_FOLDER_DELETED("cb_temp_folder_deleted", WSEventTopic.TEMP_FOLDER, WSDataSourceEvent.class),
 
     DB_LOG_UPDATED("cb_database_output_log_updated", WSEventTopic.DB_OUTPUT_LOG, WSOutputDBLogEvent.class),
+    TASK_SUCCESSFUL_EXECUTE("", WSEventTopic.),
 
     USER_DELETED("cb_user_deleted", WSEventTopic.USER, WSUserDeletedEvent.class);
 
