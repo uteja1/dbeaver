@@ -1508,7 +1508,6 @@ public class Main {
      * @param args the command line arguments
      */
     public int run(String[] args) {
-        log("<[Dbeaver Launcher Mode]>");
         int result = 0;
         try {
             basicRun(args);
