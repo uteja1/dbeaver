@@ -23,7 +23,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.file.Files;
 import java.util.Comparator;
 import java.util.List;
 
@@ -125,25 +124,25 @@ public class LogOutputStream extends OutputStream {
      * @return false if the file doesn't exist or the log files doesn't need to be rotated
      */
     private boolean rotateCurrentLogFile(boolean force) throws IOException {
-        boolean initializingLogFileForNewLaunch = currentLogFileOutput != null || currentLogFile.exists();
-        boolean needsRotation = initializingLogFileForNewLaunch && (currentLogSize > maxLogSize || force);
-        if (!needsRotation) {
+        if ((this.currentLogFileOutput != null || this.currentLogFile.exists()) // if we are initializing log file for new launch
+            && (this.currentLogSize > this.maxLogSize || force)
+        ) {
+            this.close();
+            
+            File newFile = logLocations.proposeDebugLogRotation();
+            if (!this.currentLogFile.renameTo(newFile)) {
+                return false;
+            }
+            this.currentLogSize = 0;
+            
+            List<File> logFiles = logLocations.getDebugLogFiles();
+            logFiles.sort(Comparator.comparing(File::getName));
+            for (int i = 0, count = logFiles.size(); i < logFiles.size() && count > maxLogFiles; i++, count--) {
+                logFiles.get(i).delete();
+            }
+            return true;
+        } else {
             return false;
         }
-
-        this.close();
-
-        File newFile = logLocations.proposeDebugLogRotation();
-        if (newFile == null || !currentLogFile.renameTo(newFile)) {
-            return false;
-        }
-        currentLogSize = 0;
-        
-        List<File> logFiles = logLocations.getDebugLogFiles();
-        logFiles.sort(Comparator.comparing(File::getName));
-        for (int i = 0, count = logFiles.size(); i < logFiles.size() && count > maxLogFiles; i++, count--) {
-            Files.delete(logFiles.get(i).toPath());
-        }
-        return true;
     }
 }
