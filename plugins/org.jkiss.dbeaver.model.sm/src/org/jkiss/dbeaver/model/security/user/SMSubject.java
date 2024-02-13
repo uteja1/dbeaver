@@ -54,6 +54,7 @@ public abstract class SMSubject implements DBPNamedObject {
         metaParameters.put(name, value);
     }
 
+    @NotNull
     public void setMetaParameters(Map<String, String>  parameters) {
         metaParameters.clear();
         metaParameters.putAll(parameters);

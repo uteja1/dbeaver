@@ -228,6 +228,7 @@ public class AltibaseTablespace extends AltibaseGlobalObject implements DBPRefre
         return name;
     }
     
+    @NotNull
     @Property(viewable = true, order = 2)
     public int getId() {
         return id;

@@ -153,7 +153,7 @@ public abstract class AbstractAICompletionEngine<SERVICE, REQUEST> implements DA
         @NotNull DBSObjectContainer mainObject,
         @Nullable String completionText,
         @NotNull IAIFormatter formatter,
-        boolean isChatAPI
+        @NotNull boolean isChatAPI
     ) {
         if (CommonUtils.isEmpty(completionText)) {
             return null;

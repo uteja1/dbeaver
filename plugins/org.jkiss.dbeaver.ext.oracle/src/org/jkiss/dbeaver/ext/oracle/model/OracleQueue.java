@@ -78,6 +78,7 @@ public class OracleQueue extends OracleSchemaObject {
         return this.parent.tableCache.getObject(monitor, parent, queueTable);
     }
 
+    @NotNull
     @Property(viewable = true, order = 3)
     public int getQId() {
         return qId;

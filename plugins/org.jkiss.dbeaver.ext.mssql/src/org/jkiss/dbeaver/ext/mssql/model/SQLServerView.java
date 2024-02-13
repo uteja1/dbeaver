@@ -77,7 +77,7 @@ public class SQLServerView extends SQLServerTableBase implements DBSView {
         return getContainer().getTableCache().getChild(monitor, getContainer(), this, attributeName);
     }
 
-    public SQLServerTableColumn getAttribute(@NotNull DBRProgressMonitor monitor, long columnId)
+    public SQLServerTableColumn getAttribute(@NotNull DBRProgressMonitor monitor, @NotNull long columnId)
         throws DBException
     {
         for (SQLServerTableColumn col : getAttributes(monitor)) {

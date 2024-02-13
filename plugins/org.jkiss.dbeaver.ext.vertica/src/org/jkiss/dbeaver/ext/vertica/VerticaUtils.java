@@ -66,6 +66,7 @@ public class VerticaUtils {
         }
     }
 
+    @NotNull
     public static int resolveValueType(@NotNull String typeName)
     {
         int divPos = typeName.indexOf('(');

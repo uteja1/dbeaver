@@ -296,6 +296,7 @@ public class SQLContextInformer
             return Status.OK_STATUS;
         }
 
+        @Nullable
         private boolean findTables(DBRProgressMonitor monitor) throws DBException {
             monitor.beginTask("Read metadata information", 1);
             cache.references = new ArrayList<>();
