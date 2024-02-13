@@ -102,7 +102,7 @@ class DesktopLogLocations implements DBPLogLocations {
     @Nullable
     @Override
     public File proposeDebugLogRotation() {
-        File debugLogFolder = IOUtils.safeGetParentFile(getDebugLog());
+        File debugLogFolder = getDebugLogFolder();
         if (debugLogFolder == null) {
             return null;
         }

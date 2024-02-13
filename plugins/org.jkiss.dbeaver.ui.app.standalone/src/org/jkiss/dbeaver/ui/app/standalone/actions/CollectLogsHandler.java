@@ -41,7 +41,6 @@ import org.jkiss.dbeaver.ui.UIUtils;
 import org.jkiss.dbeaver.ui.app.standalone.internal.CoreApplicationMessages;
 import org.jkiss.dbeaver.ui.dialogs.MessageBoxBuilder;
 import org.jkiss.dbeaver.ui.dialogs.Reply;
-import org.jkiss.utils.IOUtils;
 
 public class CollectLogsHandler extends AbstractHandler {
     private static final Log log = Log.getLog(CollectLogsHandler.class);
@@ -96,7 +95,7 @@ public class CollectLogsHandler extends AbstractHandler {
         if (eclipseLogFolder != null) {
             result.add(eclipseLogFolder);
         }
-        File debugLogFolder = IOUtils.safeGetParentFile(logLocations.getDebugLog());
+        File debugLogFolder = logLocations.getDebugLogFolder();
         if (debugLogFolder != null) {
             result.add(debugLogFolder);
         }

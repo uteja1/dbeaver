@@ -19,8 +19,6 @@ package org.jkiss.dbeaver;
 import org.jkiss.code.NotNull;
 import org.jkiss.dbeaver.model.app.DBPLogLocations;
 import org.jkiss.dbeaver.model.preferences.DBPPreferenceStore;
-import org.jkiss.utils.IOUtils;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -72,7 +70,7 @@ public class LogOutputStream extends OutputStream {
             this.rotateCurrentLogFile(true);
         } else {
             this.currentLogSize = 0;
-            File logFileFolder = IOUtils.safeGetParentFile(logLocations.getDebugLog());
+            File logFileFolder = logLocations.getDebugLogFolder();
             if (logFileFolder == null || logFileFolder.mkdirs()) {
                 throw new IOException("Failed to initialize debug log output location: " + debugLogFile);
             }

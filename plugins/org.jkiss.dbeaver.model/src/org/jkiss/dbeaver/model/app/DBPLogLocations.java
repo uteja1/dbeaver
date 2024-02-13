@@ -35,6 +35,20 @@ public interface DBPLogLocations {
     File getDebugLog();
 
     /**
+     * Returns a file representing the folder with the current debug log file, or {@code null} if it is turned off.
+     * 
+     * @return debug log folder or {@code null} if it is turned off
+     */
+    @Nullable
+    default File getDebugLogFolder() {
+        File debugLog = getDebugLog();
+        if (debugLog == null) {
+            return null;
+        }
+        return debugLog.getParentFile();
+    }
+
+    /**
      * Suggest a name for a new file with a debug log backup.
      * 
      * @return file with a new name for a backup of a debug log file
