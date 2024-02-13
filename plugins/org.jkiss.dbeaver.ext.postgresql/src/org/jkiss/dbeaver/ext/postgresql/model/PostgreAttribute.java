@@ -75,7 +75,6 @@ public abstract class PostgreAttribute<OWNER extends DBSEntity & PostgreObject> 
     private String[] foreignTableColumnOptions;
     @Nullable
     private String defaultValue;
-    @Nullable
     private boolean isGeneratedColumn;
     private long depObjectId;
 

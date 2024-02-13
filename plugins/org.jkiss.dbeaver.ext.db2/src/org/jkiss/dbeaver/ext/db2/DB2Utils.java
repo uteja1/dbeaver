@@ -612,7 +612,7 @@ public class DB2Utils {
     /**
      * Retrieves the server variant information from the DB2 SQLCA.
      */
-    public static @NotNull char getServerVariant(@NotNull DBRProgressMonitor monitor, @NotNull JDBCSession session) throws SQLException {
+    public static char getServerVariant(@NotNull DBRProgressMonitor monitor, @NotNull JDBCSession session) throws SQLException {
         DB2Sqlca sqlca = DB2Sqlca.from(session.getOriginal());
         if (sqlca == null) {
             return 0;

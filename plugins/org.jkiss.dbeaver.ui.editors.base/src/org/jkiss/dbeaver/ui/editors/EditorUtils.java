@@ -208,7 +208,6 @@ public class EditorUtils {
         return project.getResourceProperty(project.getResourcePath(resource), propName);
     }
 
-    @Nullable
     public static void setResourceProperty(@NotNull DBPProject project, @NotNull IResource resource, @NotNull String propName, @Nullable Object value) {
         project.setResourceProperty(project.getResourcePath(resource), propName, value);
     }

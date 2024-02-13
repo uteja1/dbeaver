@@ -109,7 +109,6 @@ public class PostgreExtension implements PostgreObject, PostgreScriptObject, DBP
         this.owner = schema;        
     }
     
-    @NotNull
     @Property(viewable = true, order = 3)
     public boolean getRelocatable() {
         return relocatable;

@@ -100,7 +100,6 @@ public class JDBCUtils {
         }
     }
 
-    @Nullable
     public static void setStringOrNull(PreparedStatement dbStat, int columnIndex, String value) throws SQLException {
         if (value != null) {
             dbStat.setString(columnIndex, value);
@@ -704,14 +703,14 @@ public class JDBCUtils {
     public static void appendFilterClause(@NotNull StringBuilder sql,
                                           @NotNull DBSObjectFilter filter,
                                           @NotNull String columnAlias,
-                                          @NotNull boolean firstClause) {
+                                          boolean firstClause) {
         appendFilterClause(sql, filter, columnAlias, firstClause, null);
     }
 
     public static void appendFilterClause(@NotNull StringBuilder sql,
                                           @NotNull DBSObjectFilter filter,
                                           @NotNull String columnAlias,
-                                          @NotNull boolean firstClause,
+                                          boolean firstClause,
                                           DBPDataSource dataSource) {
         if (filter.isNotApplicable()) {
             return;
