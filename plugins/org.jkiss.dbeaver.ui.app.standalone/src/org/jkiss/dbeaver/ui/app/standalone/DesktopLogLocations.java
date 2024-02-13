@@ -94,6 +94,9 @@ class DesktopLogLocations implements DBPLogLocations {
         }
         List<File> result = new ArrayList<>();
         if (debugLog != null) {
+            if (debugLog.exists()) {
+                result.add(debugLog);
+            }
             Collections.addAll(result, debugLog.getParentFile().listFiles((File dir, String name) -> logFileNamePredicate.test(name)));
         }
         return result;
